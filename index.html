@@ -8,19 +8,22 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Generador QR Gratis">
+    <meta name="theme-color" content="#000000">
+    <meta name="language" content="Spanish">
 
-    <title>Generador de QR Gratis Online | WiFi, WhatsApp, Instagram</title>
+    <title>Generador de Código QR Gratis Online | Crear QR para WiFi, WhatsApp, Instagram</title>
 
     <meta name="description"
-        content="Generador de códigos QR gratis. Crea QR personalizados para WiFi, WhatsApp, Instagram, enlaces y más. Descarga PNG, SVG o PDF.">
-
+        content="Generador de código QR gratis online. Crea QR para WiFi, WhatsApp, Instagram, enlaces, email o teléfono y descárgalo en PNG, SVG o PDF fácilmente.">
     <meta name="keywords" content="generador qr gratis, crear qr online, qr wifi, qr whatsapp, qr instagram">
 
     <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index,follow,max-image-preview:large">
 
     <meta name="monetag" content="6cd6e290fb5027a8a461a54dc544f3ec">
 
-    <meta property="og:title" content="Generador de QR Gratis Online">
+    <meta property="og:title" content="Generador de Código QR Gratis Online">
     <meta property="og:description"
         content="Crea códigos QR personalizados para WiFi, WhatsApp, Instagram y enlaces. Descarga PNG, SVG o PDF gratis.">
     <meta property="og:type" content="website">
@@ -42,9 +45,36 @@
                 }
     </script>
 
+    <script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "¿Cómo crear un código QR gratis?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Solo debes ingresar el enlace o información en el generador y descargar el código QR en formato PNG, SVG o PDF."
+}
+},
+{
+"@type": "Question",
+"name": "¿Los códigos QR caducan?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "No. Los códigos QR generados son estáticos y no caducan mientras la información siga disponible."
+}
+}
+]
+}
+</script>
+
     <script defer src="/_vercel/insights/script.js"></script>
 
     <link rel="canonical" href="https://codigoqrgratis.vercel.app/">
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
     <link rel="icon" href="/favicon.png">
 
@@ -91,6 +121,10 @@
 
         .dark header {
             background: rgba(0, 0, 0, 0.7);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         h1 {
@@ -156,9 +190,10 @@
         }
 
         .form-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            width: 100%;
         }
 
         label {
@@ -169,18 +204,36 @@
         input,
         select {
             width: 100%;
-            padding: 10px;
+            height: 32px;
+            padding: 0 12px;
             border-radius: 10px;
             border: 1px solid var(--border);
             background: var(--input);
             color: var(--text);
+            font-size: 14px;
+            box-sizing: border-box;
         }
 
         input[type="range"] {
-            appearance: none;
+            width: 100%;
             height: 6px;
             background: var(--border);
             border-radius: 10px;
+            padding: 0;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        label:has(input[type="checkbox"]) {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
         }
 
         input[type="range"]::-webkit-slider-thumb {
@@ -190,6 +243,11 @@
             background: black;
             border-radius: 50%;
             cursor: pointer;
+        }
+
+        input[type="file"] {
+            height: auto;
+            padding: 8px;
         }
 
         button {
@@ -233,42 +291,103 @@
 
         .info {
             max-width: 900px;
-            margin: 80px auto;
+            margin: 120px auto 0 auto;
             padding: 0 20px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .info h2 {
-            margin-top: 40px;
-            font-size: 22px;
+            font-size: 26px;
+            margin-top: 60px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        .info h3 {
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .info p {
+            font-size: 16px;
             opacity: .85;
-            font-size: 15px;
-            margin-top: 10px;
+            margin-top: 8px;
+        }
+
+        .info p+p {
+            margin-top: 14px;
+        }
+
+        .info {
+            border-top: 1px solid var(--border);
+            padding-top: 80px;
         }
 
         footer {
-            margin-top: 100px;
+            margin-top: 120px;
             background: var(--card);
             border-top: 1px solid var(--border);
-            padding: 50px 20px;
+            padding: 70px 20px 40px 20px;
+        }
+
+        footer h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        footer>p {
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+            text-align: center;
+            opacity: .8;
+            font-size: 15px;
+            line-height: 1.7;
         }
 
         .footer-container {
             max-width: 1100px;
             margin: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-container h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .footer-container p {
+            font-size: 14px;
+            opacity: .75;
+            line-height: 1.6;
+        }
+
+        .footer-container a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: .8;
+        }
+
+        .footer-container a:hover {
+            opacity: 1;
+            text-decoration: underline;
         }
 
         .footer-bottom {
             text-align: center;
-            margin-top: 40px;
-            font-size: 12px;
+            margin-top: 60px;
+            font-size: 13px;
             opacity: .6;
+        }
+
+        .footer-container a {
+            transition: opacity .2s ease;
         }
 
         .hidden {
@@ -281,10 +400,93 @@
             margin-top: 6px;
         }
 
-        @media(max-width:900px) {
-            .generator {
-                grid-template-columns: 1fr;
+
+        #qr {
+            min-height: 300px;
+            position: relative;
+        }
+
+        #qr-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 14px;
+            opacity: .6;
+            padding: 20px;
+        }
+
+        button:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            background: transparent;
+            border: 1px solid #999;
+            color: #999;
+        }
+
+        #toast {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: rgba(20, 20, 20, 0.92);
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.25),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: all .35s ease;
+
+            z-index: 9999;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media(max-width:768px) {
+
+            .info {
+                margin-top: 80px;
             }
+
+            .info h2 {
+                font-size: 22px;
+            }
+
+            footer {
+                padding: 60px 20px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
         }
     </style>
     <script src="https://5gvci.com/act/files/tag.min.js?z=10699929" data-cfasync="false" async></script>
@@ -296,8 +498,15 @@
 
     <header>
 
-        <h1>Generador de Código QR Gratis Online</h1>
-        <p>Crea códigos QR personalizados para WiFi, WhatsApp, Instagram y enlaces</p>
+        <h1>Generador de Código QR Gratis Online para WiFi, WhatsApp, Instagram y Enlaces</h1>
+        <p>
+            Este generador de código QR gratis permite crear códigos QR personalizados
+            para enlaces web, redes WiFi, perfiles de Instagram, números de teléfono,
+            WhatsApp y correos electrónicos.
+        </p>
+        <p>Simplemente introduce la información que
+            deseas convertir en QR y descárgalo instantáneamente en formato PNG, SVG o PDF.
+        </p>
 
         <nav class="topnav">
             <a href="/">Inicio</a>
@@ -366,6 +575,12 @@
                     <label>Tamaño del logo</label> <input type="range" id="logoSize" min="0.2" max="0.5" step="0.05"
                         value="0.4">
 
+                    <label>Título del poster</label>
+                    <input id="posterTitle" placeholder="Ej: Escanea para conectarte al WiFi">
+
+                    <label>Subtítulo</label>
+                    <input id="posterSubtitle" placeholder="Ej: Conéctate gratis">
+
                     <button onclick="resetAll()">Reiniciar</button>
 
                     <div id="error" class="error"></div>
@@ -376,13 +591,17 @@
 
             <div class="panel preview">
 
-                <div id="qr"></div>
+                <div id="qr" aria-label="Código QR generado" role="img">
+                    <div id="qr-placeholder">
+                        Introduce información para generar tu código QR
+                    </div>
+                </div>
 
                 <div class="downloads">
-                    <button onclick="downloadQR('png')">PNG</button>
-                    <button onclick="downloadQR('svg')">SVG</button>
-                    <button onclick="downloadPDF()">PDF</button>
-                    <button onclick="poster()">Poster</button>
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
                 </div>
 
             </div>
@@ -392,6 +611,19 @@
     </div>
 
     <section class="info">
+
+        <h2>Crear código QR online fácilmente</h2>
+
+        <p>
+            Nuestro generador QR online permite crear códigos QR de manera rápida y sencilla sin
+            necesidad de instalar aplicaciones. Solo ingresa la información que deseas convertir en
+            QR y obtendrás un código listo para compartir o imprimir.
+        </p>
+
+        <p>
+            Puedes utilizar este generador para crear QR para enlaces web, redes sociales,
+            números de teléfono, correos electrónicos o redes WiFi.
+        </p>
 
         <h2>¿Qué es un código QR?</h2>
 
@@ -410,7 +642,8 @@
         <h2>¿Cómo funciona este generador de QR?</h2>
 
         <p>
-            Este generador permite crear códigos QR personalizados directamente desde tu navegador. Puedes introducir
+            Este generador de código QR gratis (QR code generator) permite crear códigos QR personalizados directamente
+            desde tu navegador. Puedes introducir
             distintos tipos de información como URLs, textos, redes WiFi, números de teléfono o perfiles de redes
             sociales.
         </p>
@@ -465,33 +698,118 @@
             de tus datos.
         </p>
 
+        <h2>Preguntas frecuentes sobre códigos QR</h2>
+
+        <h3>¿Cómo crear un código QR gratis?</h3>
+        <p>
+            Para crear un código QR gratis solo necesitas ingresar la información que deseas compartir,
+            como un enlace web, una red WiFi, un número de teléfono o un perfil de redes sociales.
+            Luego puedes descargar el código QR en formatos como PNG, SVG o PDF y utilizarlo en
+            tarjetas, carteles, páginas web o materiales impresos.
+        </p>
+
+        <h3>¿Los códigos QR caducan?</h3>
+        <p>
+            Los códigos QR generados con este generador son estáticos, lo que significa que no caducan.
+            Puedes utilizarlos de forma permanente siempre que la información a la que apuntan siga
+            existiendo.
+        </p>
+
+        <h3>¿Puedo usar los códigos QR para negocios?</h3>
+        <p>
+            Sí. Los códigos QR son ampliamente utilizados en negocios para compartir menús digitales,
+            conectar clientes a redes WiFi, facilitar pagos móviles o dirigir usuarios a redes sociales
+            y sitios web.
+        </p>
+
+        <h3>¿Es seguro usar códigos QR?</h3>
+        <p>
+            Sí, siempre que el enlace o la información provenga de una fuente confiable. Los códigos QR
+            son una herramienta segura y ampliamente utilizada en marketing digital y comunicación.
+        </p>
+        <h2>Usos comunes de los códigos QR</h2>
+
+        <p>
+            Los códigos QR tienen múltiples aplicaciones en el mundo digital y físico. Muchas empresas
+            los utilizan para conectar experiencias offline con contenido online.
+        </p>
+
+        <p>
+            Algunos usos comunes incluyen compartir enlaces a sitios web, permitir que los usuarios
+            se conecten rápidamente a una red WiFi, abrir conversaciones en WhatsApp, compartir perfiles
+            de Instagram o incluso realizar pagos móviles.
+        </p>
+
+        <p>
+            También son utilizados en restaurantes para mostrar menús digitales, en eventos para
+            compartir información con los asistentes y en campañas de marketing para dirigir tráfico
+            a páginas específicas.
+        </p>
+
+        <h2>Ventajas de usar códigos QR</h2>
+
+        <p>
+            Los códigos QR se han convertido en una herramienta esencial en el marketing
+            digital y la comunicación moderna. Permiten compartir información de forma
+            rápida y sin necesidad de escribir enlaces largos o contraseñas.
+        </p>
+
+        <p>
+            Muchas empresas utilizan códigos QR para dirigir usuarios a sitios web,
+            mostrar menús digitales en restaurantes, compartir información en eventos
+            o facilitar el acceso a redes WiFi.
+        </p>
+
+        <p>
+            Gracias a su facilidad de uso y compatibilidad con smartphones, los códigos
+            QR son una solución práctica para conectar el mundo físico con el digital.
+        </p>
     </section>
 
+    <div id="toast"></div>
+
     <footer>
+        <h2>Generador QR gratis online</h2>
+        <p>
+            Nuestro generador de código QR gratis online permite crear códigos QR
+            para múltiples usos como enlaces web, redes WiFi, WhatsApp,
+            Instagram o información de contacto. Los códigos QR pueden
+            descargarse en PNG, SVG o PDF listos para imprimir o compartir.
+        </p>
 
         <div class="footer-container">
 
             <div>
-                <h4>Generador QR</h4>
-                <p>Herramienta gratuita para crear códigos QR personalizados.</p>
+                <h4><a href="/">Generador QR</a></h4>
+                <p>
+                    Herramienta gratuita para crear códigos QR personalizados para WiFi,
+                    WhatsApp, Instagram, enlaces web, teléfonos o correos electrónicos.
+                </p>
             </div>
 
             <div>
                 <h4>Privacidad</h4>
-                <p>No almacenamos datos ni información personal.</p>
+                <p>
+                    Este generador de código QR funciona completamente en tu navegador.
+                    No almacenamos datos ni información personal.
+                </p>
             </div>
 
             <div>
                 <h4>Legal</h4>
-                <p>Los QR generados son responsabilidad del usuario.</p>
+                <p>
+                    Los códigos QR generados son responsabilidad del usuario.
+                    Esta herramienta es gratuita y se ofrece sin garantía.
+                </p>
             </div>
 
             <div>
                 <h4>Enlaces</h4>
                 <p>
+                    <a href="/">Inicio</a><br>
+                    <a href="about.html">Acerca</a><br>
                     <a href="privacy.html">Privacidad</a><br>
-                    <a href="terms.html">Términos</a><br>
-                    <a href="about.html">Acerca</a>
+                    <a href="terms.html">Términos</a>
                 </p>
             </div>
 
@@ -502,7 +820,6 @@
         </div>
 
     </footer>
-
     <script>
 
         const savedTheme = localStorage.getItem("qr_dark");
@@ -645,6 +962,8 @@
 
         function updateQR() {
 
+            document.getElementById("qr-placeholder")?.remove();
+
             if (!validate()) return;
 
             let size = document.getElementById("size").value;
@@ -658,10 +977,7 @@
             let style = document.getElementById("qrStyle").value;
             let cornerStyle = document.getElementById("cornerStyle").value;
 
-            let dots = {
-                color: color,
-                type: style
-            };
+            let dots;
 
             if (gradient) {
 
@@ -675,7 +991,15 @@
                             { offset: 1, color: gradientColor }
                         ]
                     }
-                }
+                };
+
+            } else {
+
+                dots = {
+                    color: color,
+                    type: style,
+                    gradient: null
+                };
 
             }
 
@@ -705,6 +1029,8 @@
                 }
 
             });
+
+            enableDownloadButtons();
 
         }
 
@@ -740,8 +1066,27 @@
 
         }
 
+        function enableDownloadButtons() {
+
+            document.getElementById("btnPNG").disabled = false;
+            document.getElementById("btnSVG").disabled = false;
+            document.getElementById("btnPDF").disabled = false;
+            document.getElementById("btnPoster").disabled = false;
+
+        }
+
         function downloadQR(type) {
+
             qr.download({ name: "qr", extension: type });
+
+            if (type === "png") {
+                showToast("QR descargado en PNG");
+            }
+
+            if (type === "svg") {
+                showToast("QR descargado en SVG");
+            }
+
         }
 
         function downloadPDF() {
@@ -749,11 +1094,17 @@
             const canvas = document.querySelector("#qr canvas");
             const { jsPDF } = window.jspdf;
 
-            const pdf = new jsPDF();
+            showToast("QR descargado en PDF");
 
-            pdf.addImage(canvas.toDataURL(), "PNG", 40, 40, 120, 120);
+            setTimeout(() => {
 
-            pdf.save("qr.pdf");
+                const pdf = new jsPDF();
+
+                pdf.addImage(canvas.toDataURL(), "PNG", 40, 40, 120, 120);
+
+                pdf.save("qr.pdf");
+
+            }, 100);
 
         }
 
@@ -763,45 +1114,154 @@
 
             const poster = document.createElement("canvas");
 
-            poster.width = 800;
-            poster.height = 1000;
+            poster.width = 1240;
+            poster.height = 1754;
 
             const ctx = poster.getContext("2d");
 
-            ctx.fillStyle = "#fff";
-            ctx.fillRect(0, 0, 800, 1000);
+            // fondo blanco
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, poster.width, poster.height);
 
-            ctx.font = "40px sans-serif";
+            const title = document.getElementById("posterTitle")?.value || "Escanea este código";
+            const subtitle = document.getElementById("posterSubtitle")?.value || "Usa la cámara de tu teléfono";
+
             ctx.textAlign = "center";
 
-            ctx.fillText("Escanea este código", 400, 120);
+            // título
+            ctx.fillStyle = "#111";
+            ctx.font = "bold 60px sans-serif";
+            ctx.fillText(title, poster.width / 2, 220);
 
-            ctx.drawImage(canvas, 200, 200, 400, 400);
+            // subtitulo
+            ctx.fillStyle = "#666";
+            ctx.font = "36px sans-serif";
+            ctx.fillText(subtitle, poster.width / 2, 300);
 
-            ctx.font = "24px sans-serif";
+            // sombra QR
+            ctx.shadowColor = "rgba(0,0,0,0.15)";
+            ctx.shadowBlur = 40;
 
-            ctx.fillText(buildData(), 400, 700);
+            ctx.drawImage(canvas, 370, 450, 500, 500);
+
+            ctx.shadowBlur = 0;
+
+            // link
+            ctx.fillStyle = "#444";
+            ctx.font = "30px sans-serif";
+
+            ctx.fillStyle = "#444";
+            ctx.font = "30px sans-serif";
+
+            if (type.value === "wifi") {
+
+                const ssid = document.getElementById("ssid")?.value || "";
+                const pass = document.getElementById("pass")?.value || "";
+
+                ctx.fillText("Red WiFi: " + ssid, poster.width / 2, 1050);
+
+                if (pass) {
+                    ctx.fillText("Contraseña: " + pass, poster.width / 2, 1110);
+                }
+
+            } else {
+
+                let data = buildData();
+
+                if (data.length > 50) {
+                    data = data.substring(0, 50) + "...";
+                }
+
+                ctx.fillText(data, poster.width / 2, 1050);
+
+            }
+
+            // instrucciones
+            ctx.fillStyle = "#777";
+            ctx.font = "26px sans-serif";
+            ctx.fillText("Escanea con la cámara de tu teléfono", poster.width / 2, 1150);
+
 
             const link = document.createElement("a");
 
-            link.download = "poster.png";
+            link.download = "qr-poster.png";
             link.href = poster.toDataURL();
 
-            link.click();
+            showToast("Poster generado correctamente");
+
+            setTimeout(() => {
+                link.click();
+            }, 100);
+
+        }
+
+
+        function showToast(msg) {
+
+            const toast = document.getElementById("toast");
+
+            toast.innerText = msg;
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
 
         }
 
         function resetAll() {
 
-            document.querySelectorAll("input").forEach(i => {
-                if (i.type != "color" && i.type != "range") i.value = "";
+            // limpiar inputs de texto
+            document.querySelectorAll("#fields input").forEach(i => i.value = "");
+
+            // valores por defecto
+            document.getElementById("color").value = "#000000";
+            document.getElementById("bg").value = "#ffffff";
+            document.getElementById("size").value = 300;
+            document.getElementById("margin").value = 5;
+            document.getElementById("logoSize").value = 0.4;
+
+            document.getElementById("qrStyle").value = "rounded";
+            document.getElementById("cornerStyle").value = "square";
+
+            // quitar gradiente
+            document.getElementById("gradient").checked = false;
+            document.getElementById("gradientControls").classList.add("hidden");
+
+            // quitar logo
+            document.getElementById("logo").value = "";
+
+            // limpiar error
+            document.getElementById("error").innerText = "";
+
+            // resetear QR completamente
+            qr.update({
+                data: "",
+                image: null,
+                dotsOptions: {
+                    color: "#000000",
+                    type: "rounded"
+                },
+                backgroundOptions: {
+                    color: "#ffffff"
+                }
             });
 
-            document.getElementById("error").innerText = "";
-            updateQR();
+            // volver a mostrar placeholder
+            if (!document.getElementById("qr-placeholder")) {
+                const placeholder = document.createElement("div");
+                placeholder.id = "qr-placeholder";
+                placeholder.innerText = "Introduce información para generar tu código QR";
+                document.getElementById("qr").appendChild(placeholder);
+            }
+
+            document.getElementById("btnPNG").disabled = true;
+            document.getElementById("btnSVG").disabled = true;
+            document.getElementById("btnPDF").disabled = true;
+            document.getElementById("btnPoster").disabled = true;
 
         }
-
     </script>
 
     <script>
