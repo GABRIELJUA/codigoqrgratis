@@ -833,21 +833,22 @@
         }
 
         const qr = new QRCodeStyling({
-            width: 300,
-            height: 300,
+            width: 1200,
+            height: 1200,
             type: "canvas",
             data: "",
 
             qrOptions: { errorCorrectionLevel: "H" },
+
             dotsOptions: { color: "#000", type: "rounded" },
+
             backgroundOptions: { color: "#fff" },
 
             imageOptions: {
                 crossOrigin: "anonymous",
-                margin: 5,
+                margin: 10,
                 imageSize: 0.4
             }
-
         });
 
         qr.append(document.getElementById("qr"));
