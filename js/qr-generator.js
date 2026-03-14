@@ -32,7 +32,6 @@ const qr = new QRCodeStyling({
     }
 });
 
-
 const qrContainer = document.getElementById("qr");
 
 if (qrContainer) {
@@ -53,73 +52,126 @@ function renderFields() {
     let html = "";
 
     switch (type.value) {
-
         case "url":
-            html = '<input id="data" placeholder="https://...">';
+            html = '<input id="data" placeholder="https://..." inputmode="url">';
             break;
-
         case "text":
             html = '<input id="data" placeholder="Texto">';
             break;
-
         case "wifi":
-            html = '<input id="ssid" placeholder="SSID"><input id="pass" placeholder="Password">';
+            html = '<input id="ssid" placeholder="Nombre de red (SSID)"><input id="pass" placeholder="Contraseña (opcional)"><select id="security"><option value="WPA" selected>Seguridad WPA/WPA2</option><option value="WEP">Seguridad WEP</option><option value="nopass">Red abierta (sin contraseña)</option></select>';
             break;
-
         case "whatsapp":
-            html = '<input id="data" placeholder="Número">';
+            html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric"><input id="waMessage" placeholder="Mensaje opcional">';
             break;
-
         case "instagram":
-            html = '<input id="data" placeholder="Usuario">';
+            html = '<input id="data" placeholder="Usuario sin @">';
             break;
-
         case "email":
-            html = '<input id="data" placeholder="email">';
+            html = '<input id="data" placeholder="correo@dominio.com" inputmode="email">';
             break;
-
         case "phone":
-            html = '<input id="data" placeholder="Teléfono">';
+            html = '<input id="data" placeholder="Solo números" inputmode="numeric">';
             break;
-
     }
 
     fields.innerHTML = html;
-
     bindRealtime();
 }
 
 type?.addEventListener("change", renderFields);
-
 renderFields();
 
 // ===============================
 // VALIDACIÓN
 // ===============================
 
+function cleanPhone(value = "") {
+    return value.replace(/\D/g, "");
+}
+
+function validateUrl(value = "") {
+    try {
+        const parsed = new URL(value);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch {
+        return false;
+    }
+}
+
+function normalizeUrl(value = "") {
+    const clean = value.trim();
+
+    if (!clean) return "";
+
+    if (/^https?:\/\//i.test(clean)) {
+        return clean;
+    }
+
+    return "https://" + clean;
+}
+
 function validate() {
 
     const error = document.getElementById("error");
-    if (!error) return true;
+    if (!error || !type) return true;
 
     error.innerText = "";
 
     if (type.value === "wifi") {
-
-        const ssid = document.getElementById("ssid")?.value;
+        const ssid = document.getElementById("ssid")?.value?.trim();
+        const pass = document.getElementById("pass")?.value || "";
+        const security = document.getElementById("security")?.value || "WPA";
 
         if (!ssid) {
-            error.innerText = "Debes ingresar el SSID del WiFi.";
+            error.innerText = "Debes ingresar el nombre de red (SSID).";
+            return false;
+        }
+
+        if (security !== "nopass" && pass.trim().length < 8) {
+            error.innerText = "Para redes con contraseña, ingresa al menos 8 caracteres.";
+            return false;
+        }
+
+        return true;
+    }
+
+    const data = document.getElementById("data")?.value?.trim() || "";
+
+    if (!data) {
+        error.innerText = "Debes ingresar un valor.";
+        return false;
+    }
+
+    if (type.value === "url" && !validateUrl(normalizeUrl(data))) {
+        error.innerText = "Ingresa una URL válida que comience con http:// o https://";
+        return false;
+    }
+
+    if (type.value === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        if (!emailRegex.test(data)) {
+            error.innerText = "Ingresa un correo electrónico válido.";
             return false;
         }
     }
 
-    if (type.value !== "wifi") {
+    if (type.value === "phone" || type.value === "whatsapp") {
+        const digits = cleanPhone(data);
 
-        const data = document.getElementById("data")?.value;
+        if (digits.length < 8 || digits.length > 15) {
+            error.innerText = "Ingresa un número válido de 8 a 15 dígitos.";
+            return false;
+        }
+    }
 
-        if (!data) {
-            error.innerText = "Debes ingresar un valor.";
+    if (type.value === "instagram") {
+        const username = data.replace(/^@/, "");
+        const instagramRegex = /^[a-zA-Z0-9._]{1,30}$/;
+
+        if (!instagramRegex.test(username)) {
+            error.innerText = "El usuario de Instagram solo puede tener letras, números, punto y guion bajo.";
             return false;
         }
     }
@@ -133,30 +185,48 @@ function validate() {
 
 function buildData() {
 
+    if (!type) return "";
+
     switch (type.value) {
-
         case "url":
+            return normalizeUrl(document.getElementById("data")?.value || "");
+
         case "text":
-            return document.getElementById("data")?.value || "";
+            return document.getElementById("data")?.value?.trim() || "";
 
-        case "wifi":
-
-            const ssid = document.getElementById("ssid")?.value || "";
+        case "wifi": {
+            const ssid = document.getElementById("ssid")?.value?.trim() || "";
             const pass = document.getElementById("pass")?.value || "";
+            const security = document.getElementById("security")?.value || "WPA";
+            const safePass = security === "nopass" ? "" : pass;
 
-            return `WIFI:T:WPA;S:${ssid};P:${pass};;`;
+            return `WIFI:T:${security};S:${ssid};P:${safePass};;`;
+        }
 
-        case "whatsapp":
-            return "https://wa.me/" + (document.getElementById("data")?.value || "");
+        case "whatsapp": {
+            const number = cleanPhone(document.getElementById("data")?.value || "");
+            const message = document.getElementById("waMessage")?.value?.trim();
 
-        case "instagram":
-            return "https://instagram.com/" + (document.getElementById("data")?.value || "");
+            if (message) {
+                return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+            }
+
+            return "https://wa.me/" + number;
+        }
+
+        case "instagram": {
+            const username = (document.getElementById("data")?.value || "").trim().replace(/^@/, "");
+            return "https://instagram.com/" + username;
+        }
 
         case "email":
-            return "mailto:" + document.getElementById("data")?.value;
+            return "mailto:" + (document.getElementById("data")?.value?.trim() || "");
 
         case "phone":
-            return "tel:" + document.getElementById("data")?.value;
+            return "tel:" + cleanPhone(document.getElementById("data")?.value || "");
+
+        default:
+            return "";
     }
 }
 
@@ -168,23 +238,25 @@ function updateQR() {
 
     document.getElementById("qr-placeholder")?.remove();
 
-    if (!validate()) return;
+    if (!validate()) {
+        disableDownloadButtons();
+        return;
+    }
 
-    let size = document.getElementById("size").value;
-    let margin = document.getElementById("margin").value;
-    let color = document.getElementById("color").value;
-    let bg = document.getElementById("bg").value;
-    let gradient = document.getElementById("gradient").checked;
+    let size = document.getElementById("size")?.value || 300;
+    let margin = document.getElementById("margin")?.value || 5;
+    let color = document.getElementById("color")?.value || "#000000";
+    let bg = document.getElementById("bg")?.value || "#ffffff";
+    let gradient = document.getElementById("gradient")?.checked;
     let gradientColor = document.getElementById("gradientColor")?.value || "#6366f1";
-    let logoSize = document.getElementById("logoSize").value;
+    let logoSize = document.getElementById("logoSize")?.value || 0.4;
 
-    let style = document.getElementById("qrStyle").value;
-    let cornerStyle = document.getElementById("cornerStyle").value;
+    let style = document.getElementById("qrStyle")?.value || "rounded";
+    let cornerStyle = document.getElementById("cornerStyle")?.value || "square";
 
     let dots;
 
     if (gradient) {
-
         dots = {
             type: style,
             gradient: {
@@ -196,9 +268,7 @@ function updateQR() {
                 ]
             }
         };
-
     } else {
-
         dots = {
             color: color,
             type: style
@@ -206,26 +276,18 @@ function updateQR() {
     }
 
     qr.update({
-
         data: buildData(),
-
         width: Number(size),
         height: Number(size),
-
         margin: Number(margin),
-
         dotsOptions: dots,
-
         cornersSquareOptions: {
             type: cornerStyle
         },
-
         cornersDotOptions: {
             type: cornerStyle
         },
-
         backgroundOptions: { color: bg },
-
         imageOptions: {
             crossOrigin: "anonymous",
             margin: 5,
@@ -236,16 +298,78 @@ function updateQR() {
     enableDownloadButtons();
 }
 
+function resetAll() {
+    document.querySelectorAll('.form-grid input, .form-grid select').forEach((el) => {
+        if (el.type === "checkbox") {
+            el.checked = false;
+            return;
+        }
+
+        if (el.type === "color") {
+            el.value = el.id === "bg" ? "#ffffff" : "#000000";
+            if (el.id === "gradientColor") el.value = "#6366f1";
+            return;
+        }
+
+        if (el.type === "range") {
+            if (el.id === "size") el.value = 300;
+            if (el.id === "margin") el.value = 5;
+            if (el.id === "logoSize") el.value = 0.4;
+            return;
+        }
+
+        if (el.type === "file") {
+            el.value = "";
+            return;
+        }
+
+        if (el.id === "data" || el.id === "ssid" || el.id === "pass" || el.id === "waMessage" || el.id === "posterCta") {
+            el.value = "";
+        }
+    });
+
+    toggleGradientControls();
+    disableDownloadButtons();
+
+    const error = document.getElementById("error");
+    if (error) error.innerText = "";
+
+    const placeholder = document.getElementById("qr-placeholder");
+    if (!placeholder && qrContainer) {
+        const div = document.createElement("div");
+        div.id = "qr-placeholder";
+        div.textContent = "Introduce información para generar tu código QR";
+        qrContainer.appendChild(div);
+    }
+
+    qr.update({ data: "" });
+}
+
+function toggleGradientControls() {
+    const gradient = document.getElementById("gradient");
+    const controls = document.getElementById("gradientControls");
+
+    if (!gradient || !controls) return;
+
+    controls.classList.toggle("hidden", !gradient.checked);
+}
+
 // ===============================
 // BOTONES
 // ===============================
 
 function enableDownloadButtons() {
+    document.getElementById("btnPNG") && (document.getElementById("btnPNG").disabled = false);
+    document.getElementById("btnSVG") && (document.getElementById("btnSVG").disabled = false);
+    document.getElementById("btnPDF") && (document.getElementById("btnPDF").disabled = false);
+    document.getElementById("btnPoster") && (document.getElementById("btnPoster").disabled = false);
+}
 
-    document.getElementById("btnPNG").disabled = false;
-    document.getElementById("btnSVG").disabled = false;
-    document.getElementById("btnPDF").disabled = false;
-    document.getElementById("btnPoster").disabled = false;
+function disableDownloadButtons() {
+    document.getElementById("btnPNG") && (document.getElementById("btnPNG").disabled = true);
+    document.getElementById("btnSVG") && (document.getElementById("btnSVG").disabled = true);
+    document.getElementById("btnPDF") && (document.getElementById("btnPDF").disabled = true);
+    document.getElementById("btnPoster") && (document.getElementById("btnPoster").disabled = true);
 }
 
 // ===============================
@@ -253,7 +377,6 @@ function enableDownloadButtons() {
 // ===============================
 
 function downloadQR(type) {
-
     qr.download({ name: "qr", extension: type });
 
     if (type === "png") showToast("QR descargado en PNG");
@@ -261,21 +384,19 @@ function downloadQR(type) {
 }
 
 function downloadPDF() {
-
     const canvas = document.querySelector("#qr canvas");
+    if (!canvas) return;
 
     const { jsPDF } = window.jspdf;
 
     showToast("QR descargado en PDF");
 
     setTimeout(() => {
-
         const pdf = new jsPDF();
 
         pdf.addImage(canvas.toDataURL(), "PNG", 40, 40, 120, 120);
 
         pdf.save("qr.pdf");
-
     }, 100);
 }
 
@@ -284,17 +405,14 @@ function downloadPDF() {
 // ===============================
 
 function showToast(msg) {
-
     const toast = document.getElementById("toast");
+    if (!toast) return;
 
     toast.innerText = msg;
-
     toast.classList.add("show");
 
     setTimeout(() => {
-
         toast.classList.remove("show");
-
     }, 2500);
 }
 
@@ -303,21 +421,22 @@ function showToast(msg) {
 // ===============================
 
 function bindRealtime() {
-
     document.querySelectorAll(".form-grid input,.form-grid select").forEach(el => {
-
         el.addEventListener("input", updateQR);
         el.addEventListener("change", updateQR);
-
     });
+
+    document.getElementById("gradient")?.addEventListener("change", toggleGradientControls);
 }
+
+bindRealtime();
+toggleGradientControls();
 
 // ===============================
 // LOGO
 // ===============================
 
 document.getElementById("logo")?.addEventListener("change", function () {
-
     const file = this.files[0];
 
     if (!file) return;
@@ -325,20 +444,17 @@ document.getElementById("logo")?.addEventListener("change", function () {
     const reader = new FileReader();
 
     reader.onload = function () {
-
         qr.update({
             image: reader.result
         });
 
+        updateQR();
     };
 
     reader.readAsDataURL(file);
 });
 
-
-
 function poster() {
-
     const canvas = document.querySelector("#qr canvas");
 
     if (!canvas) return;
@@ -355,9 +471,11 @@ function poster() {
 
     ctx.textAlign = "center";
 
+    const posterCta = document.getElementById("posterCta")?.value?.trim() || "Escanea este código";
+
     ctx.fillStyle = "#111";
     ctx.font = "bold 60px sans-serif";
-    ctx.fillText("Escanea este código", poster.width / 2, 220);
+    ctx.fillText(posterCta, poster.width / 2, 220);
 
     ctx.drawImage(canvas, 320, 420, 600, 600);
 
@@ -375,5 +493,4 @@ function poster() {
     setTimeout(() => {
         link.click();
     }, 100);
-
 }
