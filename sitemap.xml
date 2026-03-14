@@ -1,71 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
-<loc>https://www.codigoqrgratis.online/</loc>
-<changefreq>weekly</changefreq>
-<priority>1.0</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/url-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/wifi-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/whatsapp-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/instagram-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/telefono-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/email-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/texto-qr.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/about.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/privacy.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://www.codigoqrgratis.online/terms.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.5</priority>
-</url>
-
+  <url>
+    <loc>https://www.codigoqrgratis.online/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/url-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/wifi-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/whatsapp-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/instagram-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/telefono-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/email-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/texto-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/qr-google-review.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/qr-menu-restaurante.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/qr-para-eventos.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/qr-para-negocios.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/qr-tarjeta-presentacion.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/about.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.codigoqrgratis.online/terms.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
 </urlset>
