@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Generador de QR para Google Review Gratis | Más Reseñas</title>
+    <meta name="description" content="Crea un código QR para reseñas de Google y consigue más valoraciones de clientes con un escaneo rápido.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-google-review.html">
+    <meta property="og:title" content="Generador QR para Google Review">
+    <meta property="og:description" content="Convierte tu enlace de reseñas de Google en un código QR profesional para tu negocio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-google-review.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>QR para Google Review</h1>
+        <p>Facilita que tus clientes dejen una reseña con un solo escaneo.</p>
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/qr-para-negocios.html">QR Negocios</a>
+            <a href="/qr-para-eventos.html">QR Eventos</a>
+            <a href="/qr-menu-restaurante.html">QR Menú</a>
+        </nav>
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+    </header>
+
+    <div class="container">
+        <div class="generator">
+            <div class="panel">
+                <div class="form-grid">
+                    <input type="hidden" id="type" value="url">
+                    <label>URL de reseña en Google</label>
+                    <input id="data" placeholder="https://g.page/r/.../review">
+
+                    <label>Color QR</label>
+                    <input type="color" id="color" value="#000000">
+                    <label>Estilo del QR</label>
+                    <select id="qrStyle"><option value="square">Cuadrado</option><option value="rounded" selected>Redondeado</option><option value="classy">Diamond</option><option value="dots">Dots</option></select>
+                    <label>Estilo de esquinas</label>
+                    <select id="cornerStyle"><option value="square">Square</option><option value="dot">Dot</option><option value="extra-rounded">Extra Rounded</option></select>
+                    <label>Color fondo</label><input type="color" id="bg" value="#ffffff">
+                    <label><input type="checkbox" id="gradient">Usar gradiente</label>
+                    <div id="gradientControls" class="hidden"><label>Color final del gradiente</label><input type="color" id="gradientColor" value="#6366f1"></div>
+                    <label>Tamaño</label><input type="range" id="size" min="200" max="500" value="300">
+                    <label>Margen</label><input type="range" id="margin" min="0" max="20" value="5">
+                    <label>Logo</label><input type="file" id="logo">
+                    <label>Tamaño del logo</label><input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+                    <div id="error" class="error"></div>
+                </div>
+            </div>
+
+            <div class="panel preview">
+                <div id="qr"><div id="qr-placeholder">Pega tu enlace de Google Review para generar el QR</div></div>
+                <div class="downloads">
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
+                </div>
+                <a class="back-home" href="/">← Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="info">
+        <h2>Consigue más reseñas con un QR</h2>
+        <p>Coloca este código QR en caja, ticket o mostrador para que tus clientes lleguen directamente a la pantalla de reseñas de Google.</p>
+        <h2>Buenas prácticas</h2>
+        <p>Usa una llamada a la acción clara como “¿Cómo fue tu experiencia? Déjanos una reseña”. Mantén buen contraste para una lectura rápida del código.</p>
+    </section>
+
+    <div id="toast"></div>
+    <script src="/js/qr-generator.js" defer></script>
+</body>
+
+</html>

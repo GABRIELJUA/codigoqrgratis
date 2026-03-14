@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Generador QR para Eventos Gratis | Registro y Agenda</title>
+    <meta name="description" content="Crea un código QR para eventos y comparte registro, agenda, ubicación o formulario con asistentes.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-para-eventos.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>QR para Eventos</h1>
+        <p>Comparte registro, boletos, agenda o ubicación del evento de forma simple.</p>
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/qr-tarjeta-presentacion.html">QR Tarjeta</a>
+            <a href="/qr-google-review.html">QR Review</a>
+            <a href="/qr-para-negocios.html">QR Negocios</a>
+        </nav>
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+    </header>
+
+    <div class="container">
+        <div class="generator">
+            <div class="panel">
+                <div class="form-grid">
+                    <input type="hidden" id="type" value="url">
+                    <label>URL del evento</label>
+                    <input id="data" placeholder="https://tu-evento.com/registro">
+                    <label>Color QR</label><input type="color" id="color" value="#000000">
+                    <label>Estilo del QR</label><select id="qrStyle"><option value="square">Cuadrado</option><option value="rounded" selected>Redondeado</option><option value="classy">Diamond</option><option value="dots">Dots</option></select>
+                    <label>Estilo de esquinas</label><select id="cornerStyle"><option value="square">Square</option><option value="dot">Dot</option><option value="extra-rounded">Extra Rounded</option></select>
+                    <label>Color fondo</label><input type="color" id="bg" value="#ffffff">
+                    <label><input type="checkbox" id="gradient">Usar gradiente</label>
+                    <div id="gradientControls" class="hidden"><label>Color final del gradiente</label><input type="color" id="gradientColor" value="#6366f1"></div>
+                    <label>Tamaño</label><input type="range" id="size" min="200" max="500" value="300">
+                    <label>Margen</label><input type="range" id="margin" min="0" max="20" value="5">
+                    <label>Logo</label><input type="file" id="logo">
+                    <label>Tamaño del logo</label><input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+                    <div id="error" class="error"></div>
+                </div>
+            </div>
+
+            <div class="panel preview">
+                <div id="qr"><div id="qr-placeholder">Introduce la URL del evento para generar tu código QR</div></div>
+                <div class="downloads">
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
+                </div>
+                <a class="back-home" href="/">← Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="info">
+        <h2>QR para acceso rápido en eventos</h2>
+        <p>Un QR para eventos permite centralizar información clave como formulario de registro, mapa de acceso, programa y contactos de organización.</p>
+        <h2>Usos recomendados</h2>
+        <p>Imprímelo en acreditaciones, banners, entradas o mesas de registro para mejorar la experiencia de asistentes y patrocinadores.</p>
+    </section>
+
+    <div id="toast"></div>
+    <script src="/js/qr-generator.js" defer></script>
+</body>
+
+</html>
