@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-# Evitar indexar archivos internos
-Disallow: /js/
-Disallow: /css/
+# Permitir recursos estáticos para renderizado y evaluación SEO
+Allow: /js/
+Allow: /css/
 
 Sitemap: https://www.codigoqrgratis.online/sitemap.xml
