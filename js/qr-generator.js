@@ -176,6 +176,8 @@ function buildData() {
         case "wifi": {
             const ssid = document.getElementById("ssid")?.value?.trim() || "";
             const pass = document.getElementById("pass")?.value || "";
+            const security = document.getElementById("security")?.value || "WPA";
+            const safePass = security === "nopass" ? "" : pass;
 
             return `WIFI:T:WPA;S:${ssid};P:${pass};;`;
         }
@@ -440,9 +442,11 @@ function poster() {
 
     ctx.textAlign = "center";
 
+    const posterCta = document.getElementById("posterCta")?.value?.trim() || "Escanea este código";
+
     ctx.fillStyle = "#111";
     ctx.font = "bold 60px sans-serif";
-    ctx.fillText("Escanea este código", poster.width / 2, 220);
+    ctx.fillText(posterCta, poster.width / 2, 220);
 
     ctx.drawImage(canvas, 320, 420, 600, 600);
 
