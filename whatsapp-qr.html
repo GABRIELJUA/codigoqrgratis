@@ -13,7 +13,7 @@
 
     <meta name="robots" content="index,follow">
 
-    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-whatsapp.html">
+    <link rel="canonical" href="https://www.codigoqrgratis.online/whatsapp-qr.html">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -23,7 +23,7 @@
     <meta property="og:description"
         content="Crea un código QR para que las personas te escriban directamente por WhatsApp.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-whatsapp.html">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/whatsapp-qr.html">
 
     <!-- Schema FAQ -->
 
@@ -70,9 +70,9 @@
 
         <nav class="topnav">
             <a href="/">Inicio</a>
-            <a href="/qr-url.html">QR URL</a>
-            <a href="/qr-wifi.html">QR WiFi</a>
-            <a href="/qr-instagram.html">QR Instagram</a>
+            <a href="/url-qr.html">QR URL</a>
+            <a href="/wifi-qr.html">QR WiFi</a>
+            <a href="/instagram-qr.html">QR Instagram</a>
         </nav>
 
         <div class="modeToggle" onclick="toggleMode()">C</div>
@@ -91,7 +91,10 @@
                     <input type="hidden" id="type" value="whatsapp">
 
                     <label>Número WhatsApp</label>
-                    <input id="data" placeholder="521234567890">
+                    <input id="data" placeholder="521234567890" inputmode="numeric">
+
+                    <label>Mensaje inicial (opcional)</label>
+                    <input id="waMessage" placeholder="Hola, quiero más información">
 
                     <label>Color QR</label>
                     <input type="color" id="color" value="#000000">

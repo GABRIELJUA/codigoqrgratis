@@ -13,7 +13,7 @@
 
     <meta name="robots" content="index,follow">
 
-    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-wifi.html">
+    <link rel="canonical" href="https://www.codigoqrgratis.online/wifi-qr.html">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -22,7 +22,7 @@
     <meta property="og:description"
         content="Crea un código QR para WiFi y permite conectarse sin escribir la contraseña.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-wifi.html">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/wifi-qr.html">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -68,9 +68,9 @@
 
         <nav class="topnav">
             <a href="/">Inicio</a>
-            <a href="/qr-url.html">QR URL</a>
-            <a href="/qr-whatsapp.html">QR WhatsApp</a>
-            <a href="/qr-text.html">QR Texto</a>
+            <a href="/url-qr.html">QR URL</a>
+            <a href="/whatsapp-qr.html">QR WhatsApp</a>
+            <a href="/texto-qr.html">QR Texto</a>
         </nav>
 
         <div class="modeToggle" onclick="toggleMode()">C</div>
@@ -93,6 +93,13 @@
 
                     <label>Contraseña</label>
                     <input id="pass" placeholder="password">
+
+                    <label>Tipo de seguridad</label>
+                    <select id="security">
+                        <option value="WPA" selected>WPA/WPA2</option>
+                        <option value="WEP">WEP</option>
+                        <option value="nopass">Red abierta (sin contraseña)</option>
+                    </select>
 
                     <label>Color QR</label>
                     <input type="color" id="color" value="#000000">

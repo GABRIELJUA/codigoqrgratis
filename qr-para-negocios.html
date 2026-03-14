@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Generador QR para Negocios | Marketing y Contacto</title>
+    <meta name="description" content="Genera códigos QR para negocios y conecta clientes con catálogo, WhatsApp, web o promociones especiales.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-para-negocios.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>QR para Negocios</h1>
+        <p>Crea códigos QR para campañas, ventas, contacto y atención al cliente.</p>
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/whatsapp-qr.html">QR WhatsApp</a>
+            <a href="/qr-google-review.html">QR Review</a>
+            <a href="/qr-menu-restaurante.html">QR Menú</a>
+        </nav>
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+    </header>
+
+    <div class="container">
+        <div class="generator">
+            <div class="panel">
+                <div class="form-grid">
+                    <input type="hidden" id="type" value="url">
+                    <label>Enlace de tu negocio</label>
+                    <input id="data" placeholder="https://tu-negocio.com/ofertas">
+                    <label>Color QR</label><input type="color" id="color" value="#000000">
+                    <label>Estilo del QR</label><select id="qrStyle"><option value="square">Cuadrado</option><option value="rounded" selected>Redondeado</option><option value="classy">Diamond</option><option value="dots">Dots</option></select>
+                    <label>Estilo de esquinas</label><select id="cornerStyle"><option value="square">Square</option><option value="dot">Dot</option><option value="extra-rounded">Extra Rounded</option></select>
+                    <label>Color fondo</label><input type="color" id="bg" value="#ffffff">
+                    <label><input type="checkbox" id="gradient">Usar gradiente</label>
+                    <div id="gradientControls" class="hidden"><label>Color final del gradiente</label><input type="color" id="gradientColor" value="#6366f1"></div>
+                    <label>Tamaño</label><input type="range" id="size" min="200" max="500" value="300">
+                    <label>Margen</label><input type="range" id="margin" min="0" max="20" value="5">
+                    <label>Logo</label><input type="file" id="logo">
+                    <label>Tamaño del logo</label><input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+                    <label>Diseños predeterminados</label>
+                    <div class="preset-grid">
+                        <button type="button" onclick="applyPreset('corporativo')">Corporativo</button>
+                        <button type="button" onclick="applyPreset('premium')">Premium</button>
+                        <button type="button" onclick="applyPreset('promocion')">Promoción</button>
+                    </div>
+                    <label>Texto del póster</label>
+                    <input id="posterCta" placeholder="Ej. Escanea para ver más">
+
+                    <div id="error" class="error"></div>
+                </div>
+            </div>
+
+            <div class="panel preview">
+                <div id="qr"><div id="qr-placeholder">Añade tu enlace de negocio para crear el QR</div></div>
+                <div class="downloads">
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
+                </div>
+                <a class="back-home" href="/">← Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="info">
+        <h2>QR para marketing y ventas</h2>
+        <p>Usa un QR de negocio para llevar clientes a promociones, catálogo, formulario de contacto o checkout desde material impreso y vitrinas.</p>
+        <h2>Recomendación profesional</h2>
+        <p>Integra tu logo y respeta colores de marca para mejorar reconocimiento y aumentar confianza en el escaneo.</p>
+    </section>
+
+    <div id="toast"></div>
+    <script src="/js/qr-generator.js" defer></script>
+    <script>
+        function applyPreset(type) {
+            const presets = {
+                corporativo: { color: '#111827', bg: '#ffffff', qrStyle: 'rounded', cornerStyle: 'square' },
+                premium: { color: '#7c3aed', bg: '#f5f3ff', qrStyle: 'classy', cornerStyle: 'extra-rounded' },
+                promocion: { color: '#dc2626', bg: '#fff7ed', qrStyle: 'dots', cornerStyle: 'dot' }
+            };
+            const p = presets[type];
+            if (!p) return;
+            document.getElementById('color').value = p.color;
+            document.getElementById('bg').value = p.bg;
+            document.getElementById('qrStyle').value = p.qrStyle;
+            document.getElementById('cornerStyle').value = p.cornerStyle;
+            updateQR();
+        }
+    </script>
+</body>
+
+</html>
