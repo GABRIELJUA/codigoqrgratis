@@ -22,10 +22,6 @@
             <a href="/qr-para-negocios.html" onclick="monetagAd()">QR Negocios</a>
             <a href="/telefono-qr.html" onclick="monetagAd()">QR Teléfono</a>
             <a href="/email-qr.html" onclick="monetagAd()">QR Email</a>
-            <a href="/">Inicio</a>
-            <a href="/qr-para-negocios.html">QR Negocios</a>
-            <a href="/telefono-qr.html">QR Teléfono</a>
-            <a href="/email-qr.html">QR Email</a>
         </nav>
         <div class="modeToggle" onclick="toggleMode()">C</div>
     </header>
@@ -67,12 +63,8 @@
                     <button id="btnSVG" onclick="monetagAd(); downloadQR('svg')" disabled>SVG</button>
                     <button id="btnPDF" onclick="monetagAd(); downloadPDF()" disabled>PDF</button>
                     <button id="btnPoster" onclick="monetagAd(); poster()" disabled>Poster</button>
-                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
-                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
-                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
-                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
                 </div>
-                <a class="back-home" href="/">← Volver al inicio</a>
+                <a class="back-home" href="/" onclick="monetagAd()">← Volver al inicio</a>
             </div>
         </div>
     </div>
