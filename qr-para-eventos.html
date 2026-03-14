@@ -22,6 +22,10 @@
             <a href="/qr-tarjeta-presentacion.html" onclick="monetagAd()">QR Tarjeta</a>
             <a href="/qr-google-review.html" onclick="monetagAd()">QR Review</a>
             <a href="/qr-para-negocios.html" onclick="monetagAd()">QR Negocios</a>
+            <a href="/">Inicio</a>
+            <a href="/qr-tarjeta-presentacion.html">QR Tarjeta</a>
+            <a href="/qr-google-review.html">QR Review</a>
+            <a href="/qr-para-negocios.html">QR Negocios</a>
         </nav>
         <div class="modeToggle" onclick="toggleMode()">C</div>
     </header>
@@ -57,6 +61,10 @@
                     <button id="btnSVG" onclick="monetagAd(); downloadQR('svg')" disabled>SVG</button>
                     <button id="btnPDF" onclick="monetagAd(); downloadPDF()" disabled>PDF</button>
                     <button id="btnPoster" onclick="monetagAd(); poster()" disabled>Poster</button>
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
                 </div>
                 <a class="back-home" href="/">← Volver al inicio</a>
             </div>

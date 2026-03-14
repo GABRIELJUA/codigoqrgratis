@@ -63,6 +63,10 @@ function renderFields() {
             break;
         case "whatsapp":
             html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric"><input id="waMessage" placeholder="Mensaje opcional">';
+            html = '<input id="ssid" placeholder="Nombre de red (SSID)"><input id="pass" placeholder="Contraseña (opcional)">';
+            break;
+        case "whatsapp":
+            html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric">';
             break;
         case "instagram":
             html = '<input id="data" placeholder="Usuario sin @">';
@@ -144,6 +148,7 @@ function validate() {
     }
 
     if (type.value === "url" && !validateUrl(normalizeUrl(data))) {
+    if (type.value === "url" && !validateUrl(data)) {
         error.innerText = "Ingresa una URL válida que comience con http:// o https://";
         return false;
     }
@@ -159,6 +164,13 @@ function validate() {
 
     if (type.value === "phone" || type.value === "whatsapp") {
         const digits = cleanPhone(data);
+
+        if (digits.length < 8 || digits.length > 15) {
+            error.innerText = "Ingresa un número válido de 8 a 15 dígitos.";
+            return false;
+        }
+    }
+
 
         if (digits.length < 8 || digits.length > 15) {
             error.innerText = "Ingresa un número válido de 8 a 15 dígitos.";
@@ -213,6 +225,12 @@ function buildData() {
 
             return "https://wa.me/" + number;
         }
+
+            return `WIFI:T:WPA;S:${ssid};P:${pass};;`;
+        }
+
+        case "whatsapp":
+            return "https://wa.me/" + cleanPhone(document.getElementById("data")?.value || "");
 
         case "instagram": {
             const username = (document.getElementById("data")?.value || "").trim().replace(/^@/, "");
@@ -324,6 +342,7 @@ function resetAll() {
         }
 
         if (el.id === "data" || el.id === "ssid" || el.id === "pass" || el.id === "waMessage" || el.id === "posterCta") {
+        if (el.id === "data" || el.id === "ssid" || el.id === "pass") {
             el.value = "";
         }
     });
