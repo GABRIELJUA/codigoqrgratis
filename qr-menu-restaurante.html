@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Crear QR para Menú de Restaurante Gratis | Menú Digital con Código QR</title>
+
+    <meta name="description"
+        content="Crea un código QR para el menú digital de tu restaurante gratis. Permite a los clientes escanear el QR y ver tu carta desde su teléfono.">
+
+    <meta name="keywords" content="qr menu restaurante, menu digital qr, crear qr menu restaurante, codigo qr menu">
+
+    <meta name="robots" content="index,follow">
+
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-menu-restaurante.html">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title" content="Crear QR para Menú de Restaurante Gratis">
+    <meta property="og:description" content="Genera un código QR para el menú digital de tu restaurante.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-menu-restaurante.html">
+
+    <script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"¿Cómo crear un QR para menú de restaurante?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Solo debes subir tu menú a internet y pegar el enlace en el generador QR. Luego podrás descargar el código QR para colocarlo en tu restaurante."
+}
+},
+{
+"@type":"Question",
+"name":"¿Los códigos QR para menú caducan?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"No. Los códigos QR son estáticos y funcionarán mientras el enlace del menú siga activo."
+}
+}
+]
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Crear código QR para menú de restaurante</h1>
+
+        <p>
+            Genera un código QR para el menú digital de tu restaurante y permite que
+            los clientes accedan a tu carta escaneando el código con su teléfono.
+        </p>
+
+        <nav class="topnav">
+            <a href="/">Generador QR</a>
+            <a href="/qr-menu-restaurante.html">QR Menú</a>
+            <a href="/qr-google-review.html">QR Reseñas</a>
+            <a href="/qr-para-negocios.html">QR Negocios</a>
+        </nav>
+
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="generator">
+
+            <div class="panel">
+
+                <div class="form-grid">
+
+                    <input type="hidden" id="type" value="url">
+
+                    <label>Enlace del menú</label>
+                    <input id="data" placeholder="https://tu-menu.com">
+
+                    <label>Color QR</label>
+                    <input type="color" id="color" value="#000000">
+
+                    <label>Estilo del QR</label>
+                    <select id="qrStyle">
+                        <option value="square">Cuadrado</option>
+                        <option value="rounded" selected>Redondeado</option>
+                        <option value="classy">Diamond</option>
+                        <option value="dots">Dots</option>
+                    </select>
+
+                    <label>Estilo de esquinas</label>
+                    <select id="cornerStyle">
+                        <option value="square">Square</option>
+                        <option value="dot">Dot</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+
+                    <label>Color fondo</label>
+                    <input type="color" id="bg" value="#ffffff">
+
+                    <label>
+                        <input type="checkbox" id="gradient">
+                        Usar gradiente
+                    </label>
+
+                    <div id="gradientControls" class="hidden">
+
+                        <label>Color final del gradiente</label>
+                        <input type="color" id="gradientColor" value="#6366f1">
+
+                    </div>
+
+                    <label>Tamaño</label>
+                    <input type="range" id="size" min="200" max="500" value="300">
+
+                    <label>Margen</label>
+                    <input type="range" id="margin" min="0" max="20" value="5">
+
+                    <label>Logo</label>
+                    <input type="file" id="logo">
+
+                    <label>Tamaño del logo</label>
+                    <input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+
+                    <div id="error" class="error"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel preview">
+
+                <div id="qr">
+
+                    <div id="qr-placeholder">
+                        Introduce el enlace del menú para generar el código QR
+                    </div>
+
+                </div>
+
+                <div class="downloads">
+
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+                    <button id="btnPoster" onclick="poster()" disabled>Poster</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="info">
+
+        <h2>Menú digital con código QR</h2>
+
+        <p>
+            Los menús digitales con código QR permiten a los clientes ver la carta
+            de un restaurante escaneando un código desde su teléfono móvil.
+            Esto evita imprimir menús físicos y facilita actualizar los platos
+            cuando sea necesario.
+        </p>
+
+        <p>
+            Muchos restaurantes utilizan códigos QR en las mesas para que
+            los clientes puedan ver el menú completo desde su smartphone.
+        </p>
+
+        <h2>Ventajas de usar QR en restaurantes</h2>
+
+        <p>
+            Los códigos QR para restaurantes reducen costos de impresión,
+            permiten actualizar el menú fácilmente y ofrecen una experiencia
+            moderna para los clientes.
+        </p>
+
+        <p>
+            También permiten añadir fotos de los platos, precios actualizados
+            y promociones especiales dentro del menú digital.
+        </p>
+
+        <h2>Cómo usar un QR para menú</h2>
+
+        <p>
+            Para usar un QR para menú solo necesitas subir tu menú
+            a una página web o a un archivo PDF en internet.
+            Luego pega el enlace en el generador y descarga el código QR.
+        </p>
+
+        <p>
+            Puedes colocar el QR en mesas, ventanas, carteles
+            o incluso en tarjetas para que los clientes accedan
+            al menú rápidamente.
+        </p>
+
+    </section>
+
+
+    <footer>
+
+        <p>© Generador QR Gratis</p>
+
+    </footer>
+
+
+    <script src="/js/qr-generator.js" defer></script>
+
+</body>
+
+</html>

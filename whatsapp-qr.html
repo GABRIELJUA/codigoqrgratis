@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Generador de QR para WhatsApp Gratis | Crear Código QR WhatsApp</title>
+
+    <meta name="description"
+        content="Crea un código QR para WhatsApp gratis. Permite que las personas te escriban directamente escaneando el QR desde su teléfono.">
+
+    <meta name="robots" content="index,follow">
+
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-whatsapp.html">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Open Graph -->
+
+    <meta property="og:title" content="Generador de QR para WhatsApp Gratis">
+    <meta property="og:description"
+        content="Crea un código QR para que las personas te escriban directamente por WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-whatsapp.html">
+
+    <!-- Schema FAQ -->
+
+    <script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"¿Cómo crear un código QR para WhatsApp?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Introduce tu número de WhatsApp y el generador creará un código QR que permitirá iniciar una conversación automáticamente al escanearlo."
+}
+},
+{
+"@type":"Question",
+"name":"¿Los códigos QR para WhatsApp caducan?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"No. Los códigos QR para WhatsApp son estáticos y funcionarán mientras el número de teléfono siga activo."
+}
+}
+]
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Generador de Código QR para WhatsApp</h1>
+
+        <p>
+            Crea un código QR para que las personas puedan enviarte un mensaje en
+            WhatsApp directamente al escanearlo.
+        </p>
+
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/qr-url.html">QR URL</a>
+            <a href="/qr-wifi.html">QR WiFi</a>
+            <a href="/qr-instagram.html">QR Instagram</a>
+        </nav>
+
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="generator">
+
+            <div class="panel">
+
+                <div class="form-grid">
+
+                    <input type="hidden" id="type" value="whatsapp">
+
+                    <label>Número WhatsApp</label>
+                    <input id="data" placeholder="521234567890">
+
+                    <label>Color QR</label>
+                    <input type="color" id="color" value="#000000">
+
+                    <label>Estilo del QR</label>
+                    <select id="qrStyle">
+                        <option value="square">Cuadrado</option>
+                        <option value="rounded" selected>Redondeado</option>
+                        <option value="classy">Diamond</option>
+                        <option value="dots">Dots</option>
+                    </select>
+
+                    <label>Estilo de esquinas</label>
+                    <select id="cornerStyle">
+                        <option value="square">Square</option>
+                        <option value="dot">Dot</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+
+                    <label>Color fondo</label>
+                    <input type="color" id="bg" value="#ffffff">
+
+                    <label>
+                        <input type="checkbox" id="gradient">
+                        Usar gradiente
+                    </label>
+
+                    <div id="gradientControls" class="hidden">
+                        <label>Color final del gradiente</label>
+                        <input type="color" id="gradientColor" value="#6366f1">
+                    </div>
+
+                    <label>Tamaño</label>
+                    <input type="range" id="size" min="200" max="500" value="300">
+
+                    <label>Margen</label>
+                    <input type="range" id="margin" min="0" max="20" value="5">
+
+                    <label>Logo</label>
+                    <input type="file" id="logo">
+
+                    <label>Tamaño del logo</label>
+                    <input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+
+                    <div id="error" class="error"></div>
+
+                </div>
+
+            </div>
+
+            <div class="panel preview">
+
+                <div id="qr">
+
+                    <div id="qr-placeholder">
+                        Introduce tu número para generar el código QR
+                    </div>
+
+                </div>
+
+                <div class="downloads">
+
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTENIDO SEO -->
+
+    <section class="info">
+
+        <h2>Crear código QR para WhatsApp gratis</h2>
+
+        <p>
+            Un código QR para WhatsApp permite que las personas inicien una conversación
+            contigo automáticamente al escanear el código con su teléfono móvil.
+            Esto evita tener que escribir manualmente el número de teléfono.
+        </p>
+
+        <p>
+            Los códigos QR para WhatsApp son muy utilizados por negocios, tiendas,
+            restaurantes y profesionales que desean facilitar el contacto con clientes.
+        </p>
+
+        <h2>¿Cómo funciona un QR de WhatsApp?</h2>
+
+        <p>
+            El código QR contiene un enlace especial de WhatsApp que abre
+            automáticamente una conversación con el número especificado.
+            Cuando el usuario escanea el código, su teléfono abre la aplicación
+            de WhatsApp lista para enviar un mensaje.
+        </p>
+
+        <h2>Ventajas de usar un código QR para WhatsApp</h2>
+
+        <p>
+            Los códigos QR para WhatsApp facilitan que clientes o usuarios se comuniquen
+            rápidamente sin tener que guardar números o escribirlos manualmente.
+            Esto mejora la experiencia del usuario y aumenta las posibilidades de contacto.
+        </p>
+
+        <h2>¿Dónde se utilizan los QR de WhatsApp?</h2>
+
+        <p>
+            Los códigos QR para WhatsApp pueden utilizarse en tarjetas de presentación,
+            carteles publicitarios, menús digitales, tiendas físicas, redes sociales
+            o páginas web para permitir que los clientes contacten rápidamente.
+        </p>
+
+    </section>
+
+
+    <script src="/js/qr-generator.js"></script>
+
+    <script>
+
+        const savedTheme = localStorage.getItem("qr_dark");
+
+        if (savedTheme === "true") {
+            document.body.classList.add("dark");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem("qr_dark", document.body.classList.contains("dark"));
+        }
+
+    </script>
+
+</body>
+
+</html>

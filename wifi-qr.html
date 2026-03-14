@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Generador de QR WiFi Gratis | Crear Código QR para WiFi</title>
+
+    <meta name="description"
+        content="Genera un código QR para WiFi gratis. Permite que las personas se conecten a tu red escaneando el QR sin escribir la contraseña.">
+
+    <meta name="robots" content="index,follow">
+
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-wifi.html">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Generador de QR WiFi Gratis">
+    <meta property="og:description"
+        content="Crea un código QR para WiFi y permite conectarse sin escribir la contraseña.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-wifi.html">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"¿Cómo crear un código QR para WiFi?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Solo introduce el nombre de la red WiFi y la contraseña. El generador creará un código QR que permitirá conectarse automáticamente al escanearlo."
+}
+},
+{
+"@type":"Question",
+"name":"¿Los códigos QR para WiFi caducan?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"No. Los códigos QR para WiFi son estáticos y funcionarán mientras la red WiFi siga disponible."
+}
+}
+]
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Generador de Código QR para WiFi</h1>
+
+        <p>
+            Crea un código QR para que las personas se conecten a tu red WiFi automáticamente
+            sin escribir la contraseña.
+        </p>
+
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/qr-url.html">QR URL</a>
+            <a href="/qr-whatsapp.html">QR WhatsApp</a>
+            <a href="/qr-text.html">QR Texto</a>
+        </nav>
+
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="generator">
+
+            <div class="panel">
+
+                <div class="form-grid">
+
+                    <input type="hidden" id="type" value="wifi">
+
+                    <label>Nombre red WiFi</label>
+                    <input id="ssid" placeholder="MiWifi">
+
+                    <label>Contraseña</label>
+                    <input id="pass" placeholder="password">
+
+                    <label>Color QR</label>
+                    <input type="color" id="color" value="#000000">
+
+                    <label>Estilo del QR</label>
+                    <select id="qrStyle">
+                        <option value="square">Cuadrado</option>
+                        <option value="rounded" selected>Redondeado</option>
+                        <option value="classy">Diamond</option>
+                        <option value="dots">Dots</option>
+                    </select>
+
+                    <label>Estilo de esquinas</label>
+                    <select id="cornerStyle">
+                        <option value="square">Square</option>
+                        <option value="dot">Dot</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+
+                    <label>Color fondo</label>
+                    <input type="color" id="bg" value="#ffffff">
+
+                    <label>
+                        <input type="checkbox" id="gradient">
+                        Usar gradiente
+                    </label>
+
+                    <div id="gradientControls" class="hidden">
+                        <label>Color final del gradiente</label>
+                        <input type="color" id="gradientColor" value="#6366f1">
+                    </div>
+
+                    <label>Tamaño</label>
+                    <input type="range" id="size" min="200" max="500" value="300">
+
+                    <label>Margen</label>
+                    <input type="range" id="margin" min="0" max="20" value="5">
+
+                    <label>Logo</label>
+                    <input type="file" id="logo">
+
+                    <label>Tamaño del logo</label>
+                    <input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+
+                    <div id="error" class="error"></div>
+
+                </div>
+
+            </div>
+
+            <div class="panel preview">
+
+                <div id="qr">
+
+                    <div id="qr-placeholder">
+                        Introduce el nombre y contraseña del WiFi
+                    </div>
+
+                </div>
+
+                <div class="downloads">
+
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTENIDO SEO -->
+
+    <section class="info">
+
+        <h2>Crear código QR para WiFi gratis</h2>
+
+        <p>
+            Un código QR para WiFi permite que las personas se conecten a una red
+            inalámbrica simplemente escaneando el código con su teléfono móvil.
+            Esto evita tener que escribir manualmente el nombre de la red o la contraseña.
+        </p>
+
+        <p>
+            Los códigos QR para WiFi son muy utilizados en restaurantes, hoteles,
+            cafeterías, oficinas y hogares para facilitar el acceso a internet
+            de forma rápida y sencilla.
+        </p>
+
+        <h2>¿Cómo funciona un QR de WiFi?</h2>
+
+        <p>
+            El código QR contiene la información de la red WiFi, incluyendo el nombre
+            de la red (SSID) y la contraseña. Cuando un usuario escanea el código,
+            su dispositivo reconoce automáticamente estos datos y ofrece conectarse
+            a la red de forma inmediata.
+        </p>
+
+        <h2>Ventajas de usar códigos QR para WiFi</h2>
+
+        <p>
+            Los códigos QR para WiFi facilitan el acceso a internet para invitados
+            o clientes. Además, reducen errores al escribir contraseñas largas y
+            permiten compartir el acceso de forma segura y rápida.
+        </p>
+
+        <h2>¿Dónde se usan los QR de WiFi?</h2>
+
+        <p>
+            Los códigos QR de WiFi se utilizan comúnmente en negocios como cafeterías,
+            restaurantes, hoteles, coworkings y eventos. También pueden imprimirse
+            en carteles, mesas o tarjetas para facilitar la conexión de los visitantes.
+        </p>
+
+    </section>
+
+
+    <script src="/js/qr-generator.js"></script>
+
+    <script>
+
+        const savedTheme = localStorage.getItem("qr_dark");
+
+        if (savedTheme === "true") {
+            document.body.classList.add("dark");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem("qr_dark", document.body.classList.contains("dark"));
+        }
+
+    </script>
+
+</body>
+
+</html>

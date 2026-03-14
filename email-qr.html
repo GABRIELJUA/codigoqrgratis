@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Generador de Código QR para Email Gratis | Crear QR Correo</title>
+
+    <meta name="description"
+        content="Crea un código QR para email gratis. Permite que las personas te envíen un correo electrónico automáticamente al escanear el código QR.">
+
+    <meta name="robots" content="index,follow">
+
+    <link rel="canonical" href="https://www.codigoqrgratis.online/qr-email.html">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Open Graph -->
+
+    <meta property="og:title" content="Generador de Código QR para Email Gratis">
+    <meta property="og:description"
+        content="Convierte una dirección de correo en un código QR para que los usuarios puedan enviarte un email fácilmente.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codigoqrgratis.online/qr-email.html">
+
+    <!-- FAQ Schema -->
+
+    <script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"¿Cómo crear un código QR para email?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Introduce la dirección de correo electrónico y el generador creará un código QR que abrirá automáticamente la aplicación de correo al escanearlo."
+}
+},
+{
+"@type":"Question",
+"name":"¿Los códigos QR para email caducan?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"No. Los códigos QR para email son estáticos y funcionarán siempre que la dirección de correo exista."
+}
+}
+]
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Generador de Código QR para Email</h1>
+
+        <p>
+            Convierte una dirección de correo electrónico en un código QR que
+            permitirá enviar un email automáticamente al escanearlo.
+        </p>
+
+        <nav class="topnav">
+            <a href="/">Inicio</a>
+            <a href="/qr-url.html">QR URL</a>
+            <a href="/qr-whatsapp.html">QR WhatsApp</a>
+            <a href="/qr-wifi.html">QR WiFi</a>
+        </nav>
+
+        <div class="modeToggle" onclick="toggleMode()">C</div>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="generator">
+
+            <div class="panel">
+
+                <div class="form-grid">
+
+                    <input type="hidden" id="type" value="email">
+
+                    <label>Email</label>
+                    <input id="data" placeholder="correo@email.com">
+
+                    <label>Color QR</label>
+                    <input type="color" id="color" value="#000000">
+
+                    <label>Estilo del QR</label>
+                    <select id="qrStyle">
+                        <option value="square">Cuadrado</option>
+                        <option value="rounded" selected>Redondeado</option>
+                        <option value="classy">Diamond</option>
+                        <option value="dots">Dots</option>
+                    </select>
+
+                    <label>Estilo de esquinas</label>
+                    <select id="cornerStyle">
+                        <option value="square">Square</option>
+                        <option value="dot">Dot</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+
+                    <label>Color fondo</label>
+                    <input type="color" id="bg" value="#ffffff">
+
+                    <label>
+                        <input type="checkbox" id="gradient">
+                        Usar gradiente
+                    </label>
+
+                    <div id="gradientControls" class="hidden">
+                        <label>Color final del gradiente</label>
+                        <input type="color" id="gradientColor" value="#6366f1">
+                    </div>
+
+                    <label>Tamaño</label>
+                    <input type="range" id="size" min="200" max="500" value="300">
+
+                    <label>Margen</label>
+                    <input type="range" id="margin" min="0" max="20" value="5">
+
+                    <label>Logo</label>
+                    <input type="file" id="logo">
+
+                    <label>Tamaño del logo</label>
+                    <input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+
+                    <div id="error" class="error"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel preview">
+
+                <div id="qr">
+
+                    <div id="qr-placeholder">
+                        Introduce una dirección de correo para generar el QR
+                    </div>
+
+                </div>
+
+                <div class="downloads">
+
+                    <button id="btnPNG" onclick="downloadQR('png')" disabled>PNG</button>
+                    <button id="btnSVG" onclick="downloadQR('svg')" disabled>SVG</button>
+                    <button id="btnPDF" onclick="downloadPDF()" disabled>PDF</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="info">
+
+        <h2>Crear código QR para email gratis</h2>
+
+        <p>
+            Un código QR para email permite convertir una dirección de correo
+            electrónico en un código escaneable desde un smartphone. Cuando el
+            usuario escanea el QR, su dispositivo abrirá automáticamente la
+            aplicación de correo electrónico.
+        </p>
+
+        <p>
+            Esto facilita que las personas puedan enviarte un mensaje sin tener
+            que escribir manualmente la dirección de correo.
+        </p>
+
+        <h2>¿Cómo funciona un QR para correo electrónico?</h2>
+
+        <p>
+            El código QR contiene un enlace especial que indica al dispositivo
+            que debe abrir la aplicación de correo con la dirección precargada.
+            Esto permite iniciar un nuevo mensaje en segundos.
+        </p>
+
+        <h2>Ventajas de usar códigos QR para email</h2>
+
+        <p>
+            Los códigos QR para correo electrónico simplifican el contacto con
+            clientes o usuarios y reducen errores al escribir direcciones largas.
+        </p>
+
+        <h2>Usos comunes de códigos QR para email</h2>
+
+        <p>
+            Los QR de email se utilizan en tarjetas de presentación, páginas web,
+            publicidad, eventos y materiales impresos para facilitar que las
+            personas envíen un mensaje rápidamente.
+        </p>
+
+    </section>
+
+
+    <script src="/js/qr-generator.js"></script>
+
+    <script>
+
+        const savedTheme = localStorage.getItem("qr_dark");
+
+        if (savedTheme === "true") {
+            document.body.classList.add("dark");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem("qr_dark", document.body.classList.contains("dark"));
+        }
+
+    </script>
+
+</body>
+
+</html>
