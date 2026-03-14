@@ -46,7 +46,6 @@ const type = document.getElementById("type");
 const fields = document.getElementById("fields");
 
 function renderFields() {
-
     if (!fields || !type) return;
 
     let html = "";
@@ -63,10 +62,6 @@ function renderFields() {
             break;
         case "whatsapp":
             html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric"><input id="waMessage" placeholder="Mensaje opcional">';
-            html = '<input id="ssid" placeholder="Nombre de red (SSID)"><input id="pass" placeholder="Contraseña (opcional)">';
-            break;
-        case "whatsapp":
-            html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric">';
             break;
         case "instagram":
             html = '<input id="data" placeholder="Usuario sin @">';
@@ -116,7 +111,6 @@ function normalizeUrl(value = "") {
 }
 
 function validate() {
-
     const error = document.getElementById("error");
     if (!error || !type) return true;
 
@@ -148,8 +142,7 @@ function validate() {
     }
 
     if (type.value === "url" && !validateUrl(normalizeUrl(data))) {
-    if (type.value === "url" && !validateUrl(data)) {
-        error.innerText = "Ingresa una URL válida que comience con http:// o https://";
+        error.innerText = "Ingresa una URL válida.";
         return false;
     }
 
@@ -164,13 +157,6 @@ function validate() {
 
     if (type.value === "phone" || type.value === "whatsapp") {
         const digits = cleanPhone(data);
-
-        if (digits.length < 8 || digits.length > 15) {
-            error.innerText = "Ingresa un número válido de 8 a 15 dígitos.";
-            return false;
-        }
-    }
-
 
         if (digits.length < 8 || digits.length > 15) {
             error.innerText = "Ingresa un número válido de 8 a 15 dígitos.";
@@ -196,7 +182,6 @@ function validate() {
 // ===============================
 
 function buildData() {
-
     if (!type) return "";
 
     switch (type.value) {
@@ -226,12 +211,6 @@ function buildData() {
             return "https://wa.me/" + number;
         }
 
-            return `WIFI:T:WPA;S:${ssid};P:${pass};;`;
-        }
-
-        case "whatsapp":
-            return "https://wa.me/" + cleanPhone(document.getElementById("data")?.value || "");
-
         case "instagram": {
             const username = (document.getElementById("data")?.value || "").trim().replace(/^@/, "");
             return "https://instagram.com/" + username;
@@ -253,7 +232,6 @@ function buildData() {
 // ===============================
 
 function updateQR() {
-
     document.getElementById("qr-placeholder")?.remove();
 
     if (!validate()) {
@@ -261,21 +239,19 @@ function updateQR() {
         return;
     }
 
-    let size = document.getElementById("size")?.value || 300;
-    let margin = document.getElementById("margin")?.value || 5;
-    let color = document.getElementById("color")?.value || "#000000";
-    let bg = document.getElementById("bg")?.value || "#ffffff";
-    let gradient = document.getElementById("gradient")?.checked;
-    let gradientColor = document.getElementById("gradientColor")?.value || "#6366f1";
-    let logoSize = document.getElementById("logoSize")?.value || 0.4;
+    const size = document.getElementById("size")?.value || 300;
+    const margin = document.getElementById("margin")?.value || 5;
+    const color = document.getElementById("color")?.value || "#000000";
+    const bg = document.getElementById("bg")?.value || "#ffffff";
+    const gradient = document.getElementById("gradient")?.checked;
+    const gradientColor = document.getElementById("gradientColor")?.value || "#6366f1";
+    const logoSize = document.getElementById("logoSize")?.value || 0.4;
 
-    let style = document.getElementById("qrStyle")?.value || "rounded";
-    let cornerStyle = document.getElementById("cornerStyle")?.value || "square";
+    const style = document.getElementById("qrStyle")?.value || "rounded";
+    const cornerStyle = document.getElementById("cornerStyle")?.value || "square";
 
-    let dots;
-
-    if (gradient) {
-        dots = {
+    const dots = gradient
+        ? {
             type: style,
             gradient: {
                 type: "linear",
@@ -285,13 +261,11 @@ function updateQR() {
                     { offset: 1, color: gradientColor }
                 ]
             }
-        };
-    } else {
-        dots = {
-            color: color,
+        }
+        : {
+            color,
             type: style
         };
-    }
 
     qr.update({
         data: buildData(),
@@ -317,7 +291,7 @@ function updateQR() {
 }
 
 function resetAll() {
-    document.querySelectorAll('.form-grid input, .form-grid select').forEach((el) => {
+    document.querySelectorAll(".form-grid input, .form-grid select").forEach((el) => {
         if (el.type === "checkbox") {
             el.checked = false;
             return;
@@ -341,8 +315,7 @@ function resetAll() {
             return;
         }
 
-        if (el.id === "data" || el.id === "ssid" || el.id === "pass" || el.id === "waMessage" || el.id === "posterCta") {
-        if (el.id === "data" || el.id === "ssid" || el.id === "pass") {
+        if (["data", "ssid", "pass", "waMessage", "posterCta"].includes(el.id)) {
             el.value = "";
         }
     });
@@ -395,11 +368,11 @@ function disableDownloadButtons() {
 // DESCARGAS
 // ===============================
 
-function downloadQR(type) {
-    qr.download({ name: "qr", extension: type });
+function downloadQR(extension) {
+    qr.download({ name: "qr", extension });
 
-    if (type === "png") showToast("QR descargado en PNG");
-    if (type === "svg") showToast("QR descargado en SVG");
+    if (extension === "png") showToast("QR descargado en PNG");
+    if (extension === "svg") showToast("QR descargado en SVG");
 }
 
 function downloadPDF() {
@@ -440,7 +413,7 @@ function showToast(msg) {
 // ===============================
 
 function bindRealtime() {
-    document.querySelectorAll(".form-grid input,.form-grid select").forEach(el => {
+    document.querySelectorAll(".form-grid input,.form-grid select").forEach((el) => {
         el.addEventListener("input", updateQR);
         el.addEventListener("change", updateQR);
     });
@@ -478,15 +451,15 @@ function poster() {
 
     if (!canvas) return;
 
-    const poster = document.createElement("canvas");
+    const posterCanvas = document.createElement("canvas");
 
-    poster.width = 1240;
-    poster.height = 1754;
+    posterCanvas.width = 1240;
+    posterCanvas.height = 1754;
 
-    const ctx = poster.getContext("2d");
+    const ctx = posterCanvas.getContext("2d");
 
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, poster.width, poster.height);
+    ctx.fillRect(0, 0, posterCanvas.width, posterCanvas.height);
 
     ctx.textAlign = "center";
 
@@ -494,18 +467,18 @@ function poster() {
 
     ctx.fillStyle = "#111";
     ctx.font = "bold 60px sans-serif";
-    ctx.fillText(posterCta, poster.width / 2, 220);
+    ctx.fillText(posterCta, posterCanvas.width / 2, 220);
 
     ctx.drawImage(canvas, 320, 420, 600, 600);
 
     ctx.fillStyle = "#777";
     ctx.font = "26px sans-serif";
-    ctx.fillText("Escanea con la cámara de tu teléfono", poster.width / 2, 1150);
+    ctx.fillText("Escanea con la cámara de tu teléfono", posterCanvas.width / 2, 1150);
 
     const link = document.createElement("a");
 
     link.download = "qr-poster.png";
-    link.href = poster.toDataURL();
+    link.href = posterCanvas.toDataURL();
 
     showToast("Poster generado correctamente");
 
