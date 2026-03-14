@@ -59,10 +59,10 @@ function renderFields() {
             html = '<input id="data" placeholder="Texto">';
             break;
         case "wifi":
-            html = '<input id="ssid" placeholder="Nombre de red (SSID)"><input id="pass" placeholder="Contraseña (opcional)"><select id="security"><option value="WPA" selected>Seguridad WPA/WPA2</option><option value="WEP">Seguridad WEP</option><option value="nopass">Red abierta (sin contraseña)</option></select>';
+            html = '<input id="ssid" placeholder="Nombre de red (SSID)"><input id="pass" placeholder="Contraseña (opcional)">';
             break;
         case "whatsapp":
-            html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric"><input id="waMessage" placeholder="Mensaje opcional">';
+            html = '<input id="data" placeholder="Ej. 521234567890" inputmode="numeric">';
             break;
         case "instagram":
             html = '<input id="data" placeholder="Usuario sin @">';
@@ -99,18 +99,6 @@ function validateUrl(value = "") {
     }
 }
 
-function normalizeUrl(value = "") {
-    const clean = value.trim();
-
-    if (!clean) return "";
-
-    if (/^https?:\/\//i.test(clean)) {
-        return clean;
-    }
-
-    return "https://" + clean;
-}
-
 function validate() {
 
     const error = document.getElementById("error");
@@ -120,16 +108,9 @@ function validate() {
 
     if (type.value === "wifi") {
         const ssid = document.getElementById("ssid")?.value?.trim();
-        const pass = document.getElementById("pass")?.value || "";
-        const security = document.getElementById("security")?.value || "WPA";
 
         if (!ssid) {
             error.innerText = "Debes ingresar el nombre de red (SSID).";
-            return false;
-        }
-
-        if (security !== "nopass" && pass.trim().length < 8) {
-            error.innerText = "Para redes con contraseña, ingresa al menos 8 caracteres.";
             return false;
         }
 
@@ -143,7 +124,7 @@ function validate() {
         return false;
     }
 
-    if (type.value === "url" && !validateUrl(normalizeUrl(data))) {
+    if (type.value === "url" && !validateUrl(data)) {
         error.innerText = "Ingresa una URL válida que comience con http:// o https://";
         return false;
     }
@@ -189,8 +170,6 @@ function buildData() {
 
     switch (type.value) {
         case "url":
-            return normalizeUrl(document.getElementById("data")?.value || "");
-
         case "text":
             return document.getElementById("data")?.value?.trim() || "";
 
@@ -200,19 +179,11 @@ function buildData() {
             const security = document.getElementById("security")?.value || "WPA";
             const safePass = security === "nopass" ? "" : pass;
 
-            return `WIFI:T:${security};S:${ssid};P:${safePass};;`;
+            return `WIFI:T:WPA;S:${ssid};P:${pass};;`;
         }
 
-        case "whatsapp": {
-            const number = cleanPhone(document.getElementById("data")?.value || "");
-            const message = document.getElementById("waMessage")?.value?.trim();
-
-            if (message) {
-                return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-            }
-
-            return "https://wa.me/" + number;
-        }
+        case "whatsapp":
+            return "https://wa.me/" + cleanPhone(document.getElementById("data")?.value || "");
 
         case "instagram": {
             const username = (document.getElementById("data")?.value || "").trim().replace(/^@/, "");
@@ -323,7 +294,7 @@ function resetAll() {
             return;
         }
 
-        if (el.id === "data" || el.id === "ssid" || el.id === "pass" || el.id === "waMessage" || el.id === "posterCta") {
+        if (el.id === "data" || el.id === "ssid" || el.id === "pass") {
             el.value = "";
         }
     });
