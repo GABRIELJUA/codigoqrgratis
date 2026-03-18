@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>QR Tarjeta de Presentación | Diseños Profesionales</title>
-    <meta name="description" content="Crea un código QR para tarjeta de presentación digital con diseños predeterminados y estilo profesional.">
+    <meta name="description"
+        content="Crea un código QR para tarjeta de presentación digital con diseños predeterminados y estilo profesional.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://www.codigoqrgratis.online/qr-tarjeta-presentacion.html">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <meta name="monetag" content="f06168952f0988ad076f3ca5bb2ad3a1">
 </head>
 
 <body>
@@ -34,15 +36,26 @@
                     <label>Enlace de tu tarjeta digital</label>
                     <input id="data" placeholder="https://tu-dominio.com/perfil">
                     <label>Color QR</label><input type="color" id="color" value="#000000">
-                    <label>Estilo del QR</label><select id="qrStyle"><option value="square">Cuadrado</option><option value="rounded" selected>Redondeado</option><option value="classy">Diamond</option><option value="dots">Dots</option></select>
-                    <label>Estilo de esquinas</label><select id="cornerStyle"><option value="square">Square</option><option value="dot">Dot</option><option value="extra-rounded">Extra Rounded</option></select>
+                    <label>Estilo del QR</label><select id="qrStyle">
+                        <option value="square">Cuadrado</option>
+                        <option value="rounded" selected>Redondeado</option>
+                        <option value="classy">Diamond</option>
+                        <option value="dots">Dots</option>
+                    </select>
+                    <label>Estilo de esquinas</label><select id="cornerStyle">
+                        <option value="square">Square</option>
+                        <option value="dot">Dot</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
                     <label>Color fondo</label><input type="color" id="bg" value="#ffffff">
                     <label><input type="checkbox" id="gradient">Usar gradiente</label>
-                    <div id="gradientControls" class="hidden"><label>Color final del gradiente</label><input type="color" id="gradientColor" value="#6366f1"></div>
+                    <div id="gradientControls" class="hidden"><label>Color final del gradiente</label><input
+                            type="color" id="gradientColor" value="#6366f1"></div>
                     <label>Tamaño</label><input type="range" id="size" min="200" max="500" value="300">
                     <label>Margen</label><input type="range" id="margin" min="0" max="20" value="5">
                     <label>Logo</label><input type="file" id="logo">
-                    <label>Tamaño del logo</label><input type="range" id="logoSize" min="0.2" max="0.5" step="0.05" value="0.4">
+                    <label>Tamaño del logo</label><input type="range" id="logoSize" min="0.2" max="0.5" step="0.05"
+                        value="0.4">
                     <label>Diseños predeterminados</label>
                     <div class="preset-grid">
                         <button type="button" onclick="applyCardPreset('minimal')">Minimal</button>
@@ -57,7 +70,9 @@
             </div>
 
             <div class="panel preview">
-                <div id="qr"><div id="qr-placeholder">Ingresa la URL de tu tarjeta digital para crear el QR</div></div>
+                <div id="qr">
+                    <div id="qr-placeholder">Ingresa la URL de tu tarjeta digital para crear el QR</div>
+                </div>
                 <div class="downloads">
                     <button id="btnPNG" onclick="monetagAd(); downloadQR('png')" disabled>PNG</button>
                     <button id="btnSVG" onclick="monetagAd(); downloadQR('svg')" disabled>SVG</button>
@@ -71,9 +86,11 @@
 
     <section class="info">
         <h2>Tarjetas de presentación con QR profesional</h2>
-        <p>Incluye el QR en tus tarjetas físicas, CV, firma de correo o credenciales para que clientes accedan a tu perfil, redes y contacto en segundos.</p>
+        <p>Incluye el QR en tus tarjetas físicas, CV, firma de correo o credenciales para que clientes accedan a tu
+            perfil, redes y contacto en segundos.</p>
         <h2>Consejo de diseño</h2>
-        <p>Usa estilos predeterminados y añade logo para mantener identidad visual profesional sin perder legibilidad del código.</p>
+        <p>Usa estilos predeterminados y añade logo para mantener identidad visual profesional sin perder legibilidad
+            del código.</p>
     </section>
 
     <div id="toast"></div>
